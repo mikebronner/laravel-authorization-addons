@@ -1,0 +1,43 @@
+{
+    "name": "genealabs/laravel-authorization-addons",
+    "description": "Additional helper methods and blade directives to help with more complex authorization queries.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Bronner",
+            "email": "hello@genealabs.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "laravel/laravel": "5.5.*",
+        "mockery/mockery": "0.9.*",
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "5.7.*",
+        "satooshi/php-coveralls" : "dev-master@dev",
+        "sebastian/phpcpd": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "GeneaLabs\\LaravelAuthorizationAddons\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/database/factories"
+        ],
+        "psr-4": {
+            "GeneaLabs\\LaravelAuthorizationAddons\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GeneaLabs\\LaravelAuthorizationAddons\\Providers\\Service"
+            ]
+        }
+    }
+}
