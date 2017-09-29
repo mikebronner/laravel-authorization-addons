@@ -1,6 +1,7 @@
 <?php namespace GeneaLabs\LaravelAuthorizationAddons\Providers;
 
 use Blade;
+use Exception;
 use GeneaLabs\LaravelAuthorizationAddons\AuthorizationAddOns;
 use Illuminate\Support\ServiceProvider;
 
