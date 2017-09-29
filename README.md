@@ -8,3 +8,24 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GeneaLabs/laravel-authorization-addons/master/LICENSE)
 
 Additional helper methods and blade directives to help with more complex authorization queries.
+
+## Usage
+### `@canAny (iterable $abilities, $model)`
+Checks if any one of the abilities is authorized for the given model.
+```php
+@canAny (['create', 'edit'], $post)
+```
+
+### `@canEvery (iterable $abilities, string $model)`
+Checks if all of the abilities are authorized for the given model.
+```php
+@canAny (['create', 'edit', 'remove'], $post)
+```
+
+### `@elseCanAny (iterable $abilities, string $model)`
+Same as `@canAny`, but allowing for multiple conditionals when checking
+authorizations.
+
+### `@elseCanEvery (iterable $abilities, string $model)`
+Same as `@canEvery`, but allowing for multiple conditionals when checking
+authorizations.
