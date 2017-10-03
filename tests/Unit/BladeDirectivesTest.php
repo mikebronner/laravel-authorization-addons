@@ -7,7 +7,7 @@ class BladeDirectivesTest extends TestCase
     public function testCanAnyDirectiveIsRegistered()
     {
         $string = '@canAny (\'update\', [$post])';
-        $expected = '<?php if (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->checkAny(\'update\', [$post])): ?>';
+        $expected = '<?php if (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any(\'update\', [$post])): ?>';
 
         $this->assertEquals($expected, app('blade.compiler')->compileString($string));
     }
@@ -15,7 +15,7 @@ class BladeDirectivesTest extends TestCase
     public function testCanEveryDirectiveIsRegistered()
     {
         $string = '@canEvery (\'update\', [$post])';
-        $expected = '<?php if (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->checkEvery(\'update\', [$post])): ?>';
+        $expected = '<?php if (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every(\'update\', [$post])): ?>';
 
         $this->assertEquals($expected, app('blade.compiler')->compileString($string));
     }
@@ -23,7 +23,7 @@ class BladeDirectivesTest extends TestCase
     public function testElseCanAnyDirectiveIsRegistered()
     {
         $string = '@elseCanAny (\'update\', [$post])';
-        $expected = '<?php elseif (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->checkAny(\'update\', [$post])): ?>';
+        $expected = '<?php elseif (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any(\'update\', [$post])): ?>';
 
         $this->assertEquals($expected, app('blade.compiler')->compileString($string));
     }
@@ -31,7 +31,7 @@ class BladeDirectivesTest extends TestCase
     public function testElseCanEveryDirectiveIsRegistered()
     {
         $string = '@elseCanEvery (\'update\', [$post])';
-        $expected = '<?php elseif (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->checkEvery(\'update\', [$post])): ?>';
+        $expected = '<?php elseif (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every(\'update\', [$post])): ?>';
 
         $this->assertEquals($expected, app('blade.compiler')->compileString($string));
     }
