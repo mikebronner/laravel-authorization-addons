@@ -1,4 +1,5 @@
 # laravel-authorization-addons
+[![Join the chat at https://gitter.im/GeneaLabs/laravel-authorization-addons](https://badges.gitter.im/GeneaLabs/laravel-authorization-addons.svg)](https://gitter.im/GeneaLabs/laravel-authorization-addons?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Travis](https://img.shields.io/travis/GeneaLabs/laravel-authorization-addons.svg)](https://travis-ci.org/GeneaLabs/laravel-authorization-addons)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/d3824055-39b0-4206-b44e-8018071cc6ef.svg)](https://insight.sensiolabs.com/projects/d3824055-39b0-4206-b44e-8018071cc6ef)
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/GeneaLabs/laravel-authorization-addons.svg)](https://scrutinizer-ci.com/g/GeneaLabs/laravel-authorization-addons)
