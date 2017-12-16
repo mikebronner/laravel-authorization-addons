@@ -30,6 +30,10 @@ class Service extends ServiceProvider
         $this->registerBladeDirective('canEvery');
         $this->registerBladeDirective('elseCanAny');
         $this->registerBladeDirective('elseCanEvery');
+        $this->registerBladeDirective('cannotAny');
+        $this->registerBladeDirective('cannotEvery');
+        $this->registerBladeDirective('elseCannotAny');
+        $this->registerBladeDirective('elseCannotEvery');
     }
 
     public function provides() : array
