@@ -20,7 +20,7 @@ Checks if any one of the abilities is authorized for the given model.
 ### `@canEvery (iterable $abilities, string $model)`
 Checks if all of the abilities are authorized for the given model.
 ```php
-@canAny (['create', 'edit', 'remove'], $post)
+@canEvery (['create', 'edit', 'remove'], $post)
 ```
 
 ### `@elseCanAny (iterable $abilities, string $model)`
