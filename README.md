@@ -30,3 +30,11 @@ authorizations.
 ### `@elseCanEvery (iterable $abilities, string $model)`
 Same as `@canEvery`, but allowing for multiple conditionals when checking
 authorizations.
+
+### Inverse Methods:
+The following inverse methods are also available, along with the same signatures
+as their counterparts:
+- `@cannotAny`
+- `@cannotEvery`
+- `@elseCannotAny`
+- `@elseCannotEvery`
