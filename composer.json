@@ -18,7 +18,7 @@
         "mockery/mockery": "*",
         "phpmd/phpmd": "*",
         "phpunit/phpunit": "*",
-        "satooshi/php-coveralls" : "*",
+        "php-coveralls/php-coveralls" : "*",
         "sebastian/phpcpd": "*"
     },
     "autoload": {
