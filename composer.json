@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "illuminate/auth": "5.5 - 6.0",
+        "illuminate/auth": "^5.5|^6.0",
         "php": ">=7.2"
     },
     "require-dev": {
