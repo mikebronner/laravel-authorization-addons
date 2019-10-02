@@ -14,7 +14,7 @@
     },
     "require-dev": {
         "fzaninotto/faker": "*",
-        "laravel/laravel": "dev-develop@dev",
+        "laravel/laravel": "^6.0",
         "mockery/mockery": "*",
         "phpmd/phpmd": "*",
         "phpunit/phpunit": "*",
