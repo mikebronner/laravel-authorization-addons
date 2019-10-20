@@ -1,4 +1,7 @@
-# laravel-authorization-addons
+# Authorization Addons for Laravel
+
+![Authorization Addons for Laravel masthead image.](https://repository-images.githubusercontent.com/105207145/2dde3980-f298-11e9-8cd8-1eb8c187de10)
+
 [![Join the chat at https://gitter.im/GeneaLabs/laravel-authorization-addons](https://badges.gitter.im/GeneaLabs/laravel-authorization-addons.svg)](https://gitter.im/GeneaLabs/laravel-authorization-addons?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Travis](https://img.shields.io/travis/GeneaLabs/laravel-authorization-addons.svg)](https://travis-ci.org/GeneaLabs/laravel-authorization-addons)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/d3824055-39b0-4206-b44e-8018071cc6ef.svg)](https://insight.sensiolabs.com/projects/d3824055-39b0-4206-b44e-8018071cc6ef)
