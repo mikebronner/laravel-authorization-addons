@@ -1,110 +1,93 @@
-<?php namespace GeneaLabs\LaravelAuthorizationAddons\Tests\Unit;
+<?php
 
-use GeneaLabs\LaravelAuthorizationAddons\Tests\TestCase;
+use GeneaLabs\LaravelAuthorizationAddons\AuthorizationAddOns;
+use GeneaLabs\LaravelAuthorizationAddons\Providers\Service;
 
-class BladeDirectivesTest extends TestCase
-{
-    public function testCanAnyDirectiveIsRegistered()
-    {
-        $string = '@canAny (\'update\', [$post])';
-        $expected = '<?php if (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any(\'update\', [$post])): ?>';
+// AuthorizationAddOns unit tests
 
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
+it('compiles canAny to Gate::any()', function () {
+    $result = (new AuthorizationAddOns)->canAny("'update', [\$post]");
+
+    expect($result)->toBe("<?php if (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any('update', [\$post])): ?>");
+});
+
+it('compiles canEvery to Gate::check()', function () {
+    $result = (new AuthorizationAddOns)->canEvery("'update', [\$post]");
+
+    expect($result)->toBe("<?php if (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check('update', [\$post])): ?>");
+});
+
+it('compiles elseCanAny to elseif Gate::any()', function () {
+    $result = (new AuthorizationAddOns)->elseCanAny("'update', [\$post]");
+
+    expect($result)->toBe("<?php elseif (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any('update', [\$post])): ?>");
+});
+
+it('compiles elseCanEvery to elseif Gate::check()', function () {
+    $result = (new AuthorizationAddOns)->elseCanEvery("'update', [\$post]");
+
+    expect($result)->toBe("<?php elseif (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check('update', [\$post])): ?>");
+});
+
+it('compiles cannotAny to negated Gate::any()', function () {
+    $result = (new AuthorizationAddOns)->cannotAny("'update', [\$post]");
+
+    expect($result)->toBe("<?php if (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any('update', [\$post])): ?>");
+});
+
+it('compiles cannotEvery to negated Gate::check()', function () {
+    $result = (new AuthorizationAddOns)->cannotEvery("'update', [\$post]");
+
+    expect($result)->toBe("<?php if (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check('update', [\$post])): ?>");
+});
+
+it('compiles elseCannotAny to elseif negated Gate::any()', function () {
+    $result = (new AuthorizationAddOns)->elseCannotAny("'update', [\$post]");
+
+    expect($result)->toBe("<?php elseif (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any('update', [\$post])): ?>");
+});
+
+it('compiles elseCannotEvery to elseif negated Gate::check()', function () {
+    $result = (new AuthorizationAddOns)->elseCannotEvery("'update', [\$post]");
+
+    expect($result)->toBe("<?php elseif (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check('update', [\$post])): ?>");
+});
+
+// Service provider unit tests
+
+it('registers all eight blade directives', function () {
+    $expected = [
+        'canAny',
+        'canEvery',
+        'elseCanAny',
+        'elseCanEvery',
+        'cannotAny',
+        'cannotEvery',
+        'elseCannotAny',
+        'elseCannotEvery',
+    ];
+
+    $directives = app('blade.compiler')->getCustomDirectives();
+
+    foreach ($expected as $directive) {
+        expect($directives)->toHaveKey($directive);
     }
+});
 
-    public function testCanEveryDirectiveIsRegistered()
-    {
-        $string = '@canEvery (\'update\', [$post])';
-        $expected = '<?php if (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every(\'update\', [$post])): ?>';
+it('registers directives that delegate to AuthorizationAddOns', function () {
+    $compiled = app('blade.compiler')->compileString("@canAny('edit', \$post)");
 
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
+    expect($compiled)->toContain('Gate::class)->any(');
+});
 
-    public function testElseCanAnyDirectiveIsRegistered()
-    {
-        $string = '@elseCanAny (\'update\', [$post])';
-        $expected = '<?php elseif (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any(\'update\', [$post])): ?>';
+it('strips outer parentheses from directive parameters', function () {
+    invade(new Service(app()))->registerBladeDirective('canAny');
 
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
+    $directives = app('blade.compiler')->getCustomDirectives();
+    $callback = $directives['canAny'];
 
-    public function testElseCanEveryDirectiveIsRegistered()
-    {
-        $string = '@elseCanEvery (\'update\', [$post])';
-        $expected = '<?php elseif (app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every(\'update\', [$post])): ?>';
+    $result = $callback("('edit', \$post)");
 
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
-
-    public function testCanAnyPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCanEveryPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testElseCanAnyPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testElseCanEveryPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCannotAnyDirectiveIsRegistered()
-    {
-        $string = '@cannotAny (\'update\', [$post])';
-        $expected = '<?php if (! app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any(\'update\', [$post])): ?>';
-
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
-
-    public function testCannotEveryDirectiveIsRegistered()
-    {
-        $string = '@cannotEvery (\'update\', [$post])';
-        $expected = '<?php if (! app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every(\'update\', [$post])): ?>';
-
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
-
-    public function testElseCannotAnyDirectiveIsRegistered()
-    {
-        $string = '@elseCannotAny (\'update\', [$post])';
-        $expected = '<?php elseif (! app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->any(\'update\', [$post])): ?>';
-
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
-
-    public function testElseCannotEveryDirectiveIsRegistered()
-    {
-        $string = '@elseCannotEvery (\'update\', [$post])';
-        $expected = '<?php elseif (! app(\\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every(\'update\', [$post])): ?>';
-
-        $this->assertEquals($expected, app('blade.compiler')->compileString($string));
-    }
-
-    public function testCannotAnyPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCannotEveryPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testElseCannotAnyPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testElseCannotEveryPerformsExpectedAuthorizationChecks()
-    {
-        $this->markTestIncomplete();
-    }
-}
+    expect($result)->not->toContain('((')
+        ->and($result)->toContain("->any('edit', \$post)");
+});

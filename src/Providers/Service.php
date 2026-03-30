@@ -1,30 +1,21 @@
 <?php namespace GeneaLabs\LaravelAuthorizationAddons\Providers;
 
-use Blade;
-use Exception;
 use GeneaLabs\LaravelAuthorizationAddons\AuthorizationAddOns;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class Service extends ServiceProvider
 {
-    protected $defer = false;
-
-    protected function registerBladeDirective(string $directive, string $alias = null)
+    protected function registerBladeDirective(string $directive): void
     {
-        $directive = $alias ?: $directive;
-
-        if (array_key_exists($directive, Blade::getCustomDirectives())) {
-            throw new Exception("Blade directive '{$directive}' is already registered.");
-        }
-
-        app('blade.compiler')->directive($directive, function ($parameters) use ($directive) {
+        Blade::directive($directive, function ($parameters) use ($directive) {
             $parameters = trim($parameters, "()");
 
             return (new AuthorizationAddOns)->{$directive}($parameters);
         });
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->registerBladeDirective('canAny');
         $this->registerBladeDirective('canEvery');
@@ -36,7 +27,7 @@ class Service extends ServiceProvider
         $this->registerBladeDirective('elseCannotEvery');
     }
 
-    public function provides() : array
+    public function provides(): array
     {
         return ['genealabs-laravel-authorization-addons'];
     }

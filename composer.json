@@ -9,17 +9,16 @@
         }
     ],
     "require": {
-        "illuminate/auth": "^5.5|^6.0",
-        "php": ">=7.2"
+        "php": "^8.2",
+        "illuminate/auth": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0"
     },
     "require-dev": {
-        "fzaninotto/faker": "*",
-        "laravel/laravel": "^6.0",
-        "mockery/mockery": "*",
-        "phpmd/phpmd": "*",
-        "phpunit/phpunit": "*",
-        "php-coveralls/php-coveralls" : "*",
-        "sebastian/phpcpd": "*"
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^10.5|^11.0|^12.0",
+        "pestphp/pest": "^3.8|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.2|^4.0",
+        "spatie/invade": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -39,5 +38,10 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }

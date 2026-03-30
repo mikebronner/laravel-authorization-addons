@@ -9,7 +9,7 @@ class AuthorizationAddOns
 
     public function canEvery(string $expression)
     {
-        return "<?php if (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every({$expression})): ?>";
+        return "<?php if (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check({$expression})): ?>";
     }
 
     public function elseCanAny(string $expression)
@@ -19,7 +19,7 @@ class AuthorizationAddOns
 
     public function elseCanEvery(string $expression)
     {
-        return "<?php elseif (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every({$expression})): ?>";
+        return "<?php elseif (app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check({$expression})): ?>";
     }
 
     public function cannotAny(string $expression)
@@ -29,7 +29,7 @@ class AuthorizationAddOns
 
     public function cannotEvery(string $expression)
     {
-        return "<?php if (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every({$expression})): ?>";
+        return "<?php if (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check({$expression})): ?>";
     }
 
     public function elseCannotAny(string $expression)
@@ -39,6 +39,6 @@ class AuthorizationAddOns
 
     public function elseCannotEvery(string $expression)
     {
-        return "<?php elseif (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->every({$expression})): ?>";
+        return "<?php elseif (! app(\Illuminate\\Contracts\\Auth\\Access\\Gate::class)->check({$expression})): ?>";
     }
 }

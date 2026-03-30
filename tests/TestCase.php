@@ -1,8 +1,14 @@
 <?php namespace GeneaLabs\LaravelAuthorizationAddons\Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use GeneaLabs\LaravelAuthorizationAddons\Providers\Service;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    protected function getPackageProviders($app): array
+    {
+        return [
+            Service::class,
+        ];
+    }
 }
